@@ -3,12 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orvian</title>
+
+    <title>Orvian JS Playground</title>
 </head>
+
 <body>
 
-    <h1>به سایت Orvian خوش آمدید</h1>
-    <p>این اولین نسخه سایت من است.</p>
+    <h1>Orvian JS Playground</h1>
+
+    <p>کد JavaScript خود را بنویسید و اجرا کنید.</p>
+
+    <textarea id="code" rows="12" cols="50">
+console.log("Hello Orvian!");
+    </textarea>
+
+    <br><br>
+
+    <button onclick="runCode()">▶ اجرای کد</button>
+
+    <h2>خروجی</h2>
+
+    <pre id="output"></pre>
+
+    <script>
+        function runCode() {
+            const code = document.getElementById("code").value;
+            const output = document.getElementById("output");
+
+            output.textContent = "";
+
+            const oldLog = console.log;
+
+            console.log = function(message) {
+                output.textContent += message + "\n";
+            };
+
+            try {
+                eval(code);
+            } catch (error) {
+                output.textContent = "خطا: " + error.message;
+            }
+
+            console.log = oldLog;
+        }
+    </script>
 
 </body>
 </html>
