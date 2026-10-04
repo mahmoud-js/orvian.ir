@@ -5,48 +5,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Orvian JS Playground</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+        }
+
+        header p {
+            margin: 0;
+            color: #d1d5db;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        .editors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .editor {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .editor h2 {
+            margin: 0;
+            padding: 12px;
+            font-size: 18px;
+            color: white;
+        }
+
+        .html-title {
+            background: #e34c26;
+        }
+
+        .css-title {
+            background: #264de4;
+        }
+
+        .js-title {
+            background: #f0db4f;
+            color: #222 !important;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            border: none;
+            outline: none;
+            resize: vertical;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 14px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .preview-box {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .preview-title {
+            background: #111827;
+            color: white;
+            padding: 12px 15px;
+            font-size: 18px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            background: white;
+        }
+
+        @media (max-width: 800px) {
+            .editors {
+                grid-template-columns: 1fr;
+            }
+
+            textarea {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
+<header>
     <h1>Orvian JS Playground</h1>
+    <p>HTML ، CSS و JavaScript را بنویس و اجرا کن</p>
+</header>
 
-    <p>کد JavaScript خود را بنویسید و اجرا کنید.</p>
+<div class="container">
 
-    <textarea id="code" rows="12" cols="50">
-console.log("Hello Orvian!");
-    </textarea>
+    <div class="editors">
 
-    <br><br>
+        <div class="editor">
+            <h2 class="html-title">HTML</h2>
+            <textarea id="htmlCode"><h1>Hello Orvian!</h1>
+<p>این اولین پروژه من است.</p>
+<button>Click Me</button></textarea>
+        </div>
 
-    <button onclick="runCode()">▶ اجرای کد</button>
+        <div class="editor">
+            <h2 class="css-title">CSS</h2>
+            <textarea id="cssCode">body {
+    font-family: Arial;
+    text-align: center;
+    padding: 30px;
+}
 
-    <h2>خروجی</h2>
+h1 {
+    color: blue;
+}
 
-    <pre id="output"></pre>
+button {
+    padding: 10px 20px;
+}</textarea>
+        </div>
 
-    <script>
-        function runCode() {
-            const code = document.getElementById("code").value;
-            const output = document.getElementById("output");
+        <div class="editor">
+            <h2 class="js-title">JavaScript</h2>
+            <textarea id="jsCode">document.querySelector("button").onclick = function() {
+    alert("Hello from Orvian!");
+};</textarea>
+        </div>
 
-            output.textContent = "";
+    </div>
 
-            const oldLog = console.log;
+    <div class="controls">
+        <button onclick="runProject()">▶ اجرای پروژه</button>
+    </div>
 
-            console.log = function(message) {
-                output.textContent += message + "\n";
-            };
+    <div class="preview-box">
 
-            try {
-                eval(code);
-            } catch (error) {
-                output.textContent = "خطا: " + error.message;
-            }
+        <div class="preview-title">
+            Preview
+        </div>
 
-            console.log = oldLog;
-        }
-    </script>
+        <iframe id="preview"></iframe>
+
+    </div>
+
+</div>
+
+<script>
+
+function runProject() {
+
+    const html = document.getElementById("htmlCode").value;
+    const css = document.getElementById("cssCode").value;
+    const js = document.getElementById("jsCode").value;
+
+    const preview = document.getElementById("preview");
+
+    const documentContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                ${css}
+            </style>
+        </head>
+
+        <body>
+
+            ${html}
+
+            <script>
+                ${js}
+            <\/script>
+
+        </body>
+        </html>
+    `;
+
+    preview.srcdoc = documentContent;
+}
+
+runProject();
+
+</script>
 
 </body>
 </html>
