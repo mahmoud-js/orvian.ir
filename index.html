@@ -4,237 +4,282 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Orvian JS Playground</title>
+    <title>ورود | ORVIAN</title>
 
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
-        }
-
-        header {
-            background: #111827;
-            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
-            text-align: center;
+            font-family: Tahoma, Arial, sans-serif;
+            color: #f8fafc;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #172554 0%,
+                    #0b1120 45%,
+                    #030712 100%
+                );
         }
 
-        header h1 {
-            margin: 0 0 8px;
-        }
-
-        header p {
-            margin: 0;
-            color: #d1d5db;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 25px auto;
-            padding: 0 15px;
-        }
-
-        .editors {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .editor {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .editor h2 {
-            margin: 0;
-            padding: 12px;
-            font-size: 18px;
-            color: white;
-        }
-
-        .html-title {
-            background: #e34c26;
-        }
-
-        .css-title {
-            background: #264de4;
-        }
-
-        .js-title {
-            background: #f0db4f;
-            color: #222 !important;
-        }
-
-        textarea {
+        .login-container {
             width: 100%;
-            height: 250px;
-            border: none;
-            outline: none;
-            resize: vertical;
-            padding: 15px;
-            font-family: monospace;
-            font-size: 14px;
-            direction: ltr;
-            text-align: left;
+            max-width: 410px;
+            padding: 32px 25px;
+            background: rgba(15, 23, 42, 0.88);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 24px;
+            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.4);
+            animation: appear 0.7s ease;
         }
 
-        .controls {
-            margin: 20px 0;
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
             text-align: center;
+            margin-bottom: 12px;
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #38bdf8;
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
         }
 
-        button {
-            border: none;
-            background: #2563eb;
+        .subtitle {
+            text-align: center;
+            margin-bottom: 32px;
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #e2e8f0;
+            font-size: 13px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            background: #0b1223;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            outline: none;
             color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 16px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+        }
+
+        .password-input {
+            padding-left: 76px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 7px;
+            border: none;
+            background: transparent;
+            color: #38bdf8;
+            font-family: inherit;
+            font-size: 12px;
             cursor: pointer;
         }
 
-        button:hover {
-            background: #1d4ed8;
-        }
-
-        .preview-box {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .preview-title {
-            background: #111827;
-            color: white;
-            padding: 12px 15px;
-            font-size: 18px;
-        }
-
-        iframe {
+        .login-button {
             width: 100%;
-            height: 350px;
+            padding: 15px;
+            margin-top: 8px;
             border: none;
-            background: white;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.2s;
         }
 
-        @media (max-width: 800px) {
-            .editors {
-                grid-template-columns: 1fr;
-            }
+        .login-button:hover {
+            filter: brightness(1.15);
+        }
 
-            textarea {
-                height: 200px;
-            }
+        .login-button:active {
+            transform: scale(0.98);
+        }
+
+        .message {
+            display: none;
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        .message.error {
+            display: block;
+            color: #fca5a5;
+            background: rgba(127, 29, 29, 0.25);
+            border: 1px solid rgba(248, 113, 113, 0.25);
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #64748b;
+            font-size: 11px;
+            text-align: center;
+            line-height: 2;
+        }
+
+        .footer span {
+            color: #38bdf8;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Orvian JS Playground</h1>
-    <p>HTML ، CSS و JavaScript را بنویس و اجرا کن</p>
-</header>
+    <main class="login-container">
 
-<div class="container">
+        <div class="logo">ORVIAN</div>
 
-    <div class="editors">
+        <p class="subtitle">
+            به دنیای اورویان خوش آمدی<br>
+            برای ادامه، وارد حساب خودت شو.
+        </p>
 
-        <div class="editor">
-            <h2 class="html-title">HTML</h2>
-            <textarea id="htmlCode"><h1>Hello Orvian!</h1>
-<p>این اولین پروژه من است.</p>
-<button>Click Me</button></textarea>
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="username">نام کاربری</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="نام کاربری خود را وارد کن"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">رمز عبور</label>
+
+                <div class="input-wrapper">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="password-input"
+                        placeholder="رمز عبور خود را وارد کن"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        id="togglePassword"
+                    >
+                        نمایش
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="login-button">
+                ورود به حساب ←
+            </button>
+
+            <div
+                id="message"
+                class="message"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+        </form>
+
+        <div class="footer">
+            طراحی اختصاصی برای <span>ORVIAN</span><br>
+            ورود امن، شروع یک تجربهٔ جدید
         </div>
 
-        <div class="editor">
-            <h2 class="css-title">CSS</h2>
-            <textarea id="cssCode">body {
-    font-family: Arial;
-    text-align: center;
-    padding: 30px;
-}
+    </main>
 
-h1 {
-    color: blue;
-}
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+        const message = document.getElementById("message");
 
-button {
-    padding: 10px 20px;
-}</textarea>
-        </div>
+        togglePassword.addEventListener("click", function () {
+            const isHidden = passwordInput.type === "password";
 
-        <div class="editor">
-            <h2 class="js-title">JavaScript</h2>
-            <textarea id="jsCode">document.querySelector("button").onclick = function() {
-    alert("Hello from Orvian!");
-};</textarea>
-        </div>
+            passwordInput.type = isHidden ? "text" : "password";
+            togglePassword.textContent = isHidden ? "مخفی‌کردن" : "نمایش";
+        });
 
-    </div>
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-    <div class="controls">
-        <button onclick="runProject()">▶ اجرای پروژه</button>
-    </div>
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
 
-    <div class="preview-box">
+            message.className = "message";
 
-        <div class="preview-title">
-            Preview
-        </div>
+            if (!username || !password) {
+                message.textContent = "لطفاً نام کاربری و رمز عبور را وارد کن.";
+                message.classList.add("error");
+                return;
+            }
 
-        <iframe id="preview"></iframe>
+            message.textContent =
+                "فرم تکمیل شد؛ برای ورود واقعی باید سیستم احراز هویت متصل شود.";
 
-    </div>
-
-</div>
-
-<script>
-
-function runProject() {
-
-    const html = document.getElementById("htmlCode").value;
-    const css = document.getElementById("cssCode").value;
-    const js = document.getElementById("jsCode").value;
-
-    const preview = document.getElementById("preview");
-
-    const documentContent = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                ${css}
-            </style>
-        </head>
-
-        <body>
-
-            ${html}
-
-            <script>
-                ${js}
-            <\/script>
-
-        </body>
-        </html>
-    `;
-
-    preview.srcdoc = documentContent;
-}
-
-runProject();
-
-</script>
+            message.className = "message error";
+        });
+    </script>
 
 </body>
 </html>
