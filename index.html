@@ -4,282 +4,359 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ورود | ORVIAN</title>
+    <title>ORVIAN | ورود</title>
 
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
+            margin: 0;
             min-height: 100vh;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
             font-family: Tahoma, Arial, sans-serif;
             color: #f8fafc;
             background:
-                radial-gradient(
-                    circle at top,
-                    #172554 0%,
-                    #0b1120 45%,
-                    #030712 100%
-                );
+                radial-gradient(circle at top, #172554, #080d19 65%);
         }
 
-        .login-container {
+        .container {
             width: 100%;
-            max-width: 410px;
-            padding: 32px 25px;
-            background: rgba(15, 23, 42, 0.88);
-            border: 1px solid rgba(56, 189, 248, 0.22);
-            border-radius: 24px;
-            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.4);
-            animation: appear 0.7s ease;
-        }
-
-        @keyframes appear {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            max-width: 440px;
+            margin: auto;
         }
 
         .logo {
+            margin-bottom: 8px;
             text-align: center;
-            margin-bottom: 12px;
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 900;
             letter-spacing: 4px;
             color: #38bdf8;
-            text-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
+            text-shadow: 0 0 25px #0284c755;
         }
 
         .subtitle {
+            margin-bottom: 28px;
             text-align: center;
-            margin-bottom: 32px;
             color: #94a3b8;
             font-size: 13px;
-            line-height: 1.9;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .card {
+            padding: 25px;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            background: #111a2c;
+            box-shadow: 0 20px 60px #0005;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 21px;
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
-            color: #e2e8f0;
+            margin: 18px 0 9px;
             font-size: 13px;
-        }
-
-        .input-wrapper {
-            position: relative;
+            color: #cbd5e1;
         }
 
         input {
             width: 100%;
-            padding: 15px;
-            background: #0b1223;
+            padding: 14px;
             border: 1px solid #334155;
-            border-radius: 12px;
+            border-radius: 10px;
             outline: none;
+            background: #080f1e;
             color: white;
             font-family: inherit;
             font-size: 14px;
-            transition: border-color 0.25s, box-shadow 0.25s;
         }
 
         input:focus {
             border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+            box-shadow: 0 0 0 3px #38bdf822;
         }
 
-        .password-input {
-            padding-left: 76px;
-        }
-
-        .toggle-password {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 7px;
-            border: none;
-            background: transparent;
-            color: #38bdf8;
-            font-family: inherit;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .login-button {
+        button {
             width: 100%;
-            padding: 15px;
-            margin-top: 8px;
+            margin-top: 20px;
+            padding: 14px;
             border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #0284c7, #2563eb);
+            border-radius: 10px;
+            background: linear-gradient(120deg, #0284c7, #2563eb);
             color: white;
             font-family: inherit;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s, filter 0.2s;
         }
 
-        .login-button:hover {
-            filter: brightness(1.15);
+        button:hover {
+            filter: brightness(1.12);
         }
 
-        .login-button:active {
-            transform: scale(0.98);
+        .secondary {
+            background: #263449;
         }
 
         .message {
-            display: none;
-            margin-top: 18px;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 12px;
-            line-height: 1.9;
-            text-align: center;
-        }
-
-        .message.error {
-            display: block;
+            margin-top: 15px;
             color: #fca5a5;
-            background: rgba(127, 29, 29, 0.25);
-            border: 1px solid rgba(248, 113, 113, 0.25);
+            font-size: 13px;
+            line-height: 1.8;
         }
 
-        .footer {
-            margin-top: 25px;
-            color: #64748b;
-            font-size: 11px;
-            text-align: center;
+        .dashboard {
+            display: none;
+        }
+
+        .welcome {
+            margin-bottom: 22px;
             line-height: 2;
         }
 
-        .footer span {
-            color: #38bdf8;
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: #075985;
+            color: #bae6fd;
+            font-size: 12px;
+        }
+
+        .admin-badge {
+            background: #713f12;
+            color: #fde68a;
+        }
+
+        .feature {
+            margin-top: 12px;
+            padding: 14px;
+            border: 1px solid #29364b;
+            border-radius: 10px;
+            background: #0b1323;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .note {
+            margin-top: 18px;
+            color: #94a3b8;
+            font-size: 11px;
+            line-height: 1.9;
+        }
+
+        .footer {
+            margin-top: 22px;
+            text-align: center;
+            color: #64748b;
+            font-size: 11px;
         }
     </style>
 </head>
 
 <body>
 
-    <main class="login-container">
+<main class="container">
 
-        <div class="logo">ORVIAN</div>
+    <div class="logo">ORVIAN</div>
+    <p class="subtitle">یک تجربهٔ جدید، یک دنیای جدید</p>
 
-        <p class="subtitle">
-            به دنیای اورویان خوش آمدی<br>
-            برای ادامه، وارد حساب خودت شو.
+    <!-- صفحه ورود -->
+    <section id="loginPage" class="card">
+        <h2>ورود به حساب</h2>
+        <p style="color:#94a3b8;font-size:13px;line-height:1.9">
+            برای ادامه، اطلاعات حساب آزمایشی خود را وارد کن.
         </p>
 
         <form id="loginForm">
+            <label for="username">نام کاربری</label>
+            <input
+                id="username"
+                type="text"
+                placeholder="نام کاربری"
+                autocomplete="username"
+                required
+            >
 
-            <div class="form-group">
-                <label for="username">نام کاربری</label>
+            <label for="password">رمز عبور</label>
+            <input
+                id="password"
+                type="password"
+                placeholder="رمز عبور"
+                autocomplete="current-password"
+                required
+            >
 
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="نام کاربری خود را وارد کن"
-                    autocomplete="username"
-                    required
-                >
-            </div>
+            <button type="submit">ورود به ORVIAN ←</button>
 
-            <div class="form-group">
-                <label for="password">رمز عبور</label>
-
-                <div class="input-wrapper">
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="password-input"
-                        placeholder="رمز عبور خود را وارد کن"
-                        autocomplete="current-password"
-                        required
-                    >
-
-                    <button
-                        type="button"
-                        class="toggle-password"
-                        id="togglePassword"
-                    >
-                        نمایش
-                    </button>
-                </div>
-            </div>
-
-            <button type="submit" class="login-button">
-                ورود به حساب ←
-            </button>
-
-            <div
-                id="message"
-                class="message"
-                role="status"
-                aria-live="polite"
-            ></div>
-
+            <div id="loginMessage" class="message"></div>
         </form>
 
-        <div class="footer">
-            طراحی اختصاصی برای <span>ORVIAN</span><br>
-            ورود امن، شروع یک تجربهٔ جدید
+        <p class="note">
+            این نسخه صرفاً تمرینی است و از حساب‌های آزمایشی تعریف‌شده
+            در کد استفاده می‌کند. اطلاعات واقعی وارد نکن.
+        </p>
+    </section>
+
+    <!-- پنل ادمین -->
+    <section id="adminPage" class="card dashboard">
+        <span class="badge admin-badge">👑 ADMIN</span>
+
+        <h2 style="margin-top:18px">پنل مدیریت ORVIAN</h2>
+
+        <div class="welcome">
+            خوش آمدی، <strong id="adminName"></strong>!
+            <br>
+            شما وارد پنل آزمایشی مدیریت شده‌اید.
         </div>
 
-    </main>
+        <div class="feature">
+            👥 مدیریت کاربران
+            <br>
+            <small>بخش نمایشی؛ هنوز به پایگاه داده متصل نیست.</small>
+        </div>
 
-    <script>
-        const loginForm = document.getElementById("loginForm");
-        const usernameInput = document.getElementById("username");
-        const passwordInput = document.getElementById("password");
-        const togglePassword = document.getElementById("togglePassword");
-        const message = document.getElementById("message");
+        <div class="feature">
+            📊 آمار و گزارش‌ها
+            <br>
+            <small>آمار سایت در نسخه‌های آینده اضافه می‌شود.</small>
+        </div>
 
-        togglePassword.addEventListener("click", function () {
-            const isHidden = passwordInput.type === "password";
+        <div class="feature">
+            ⚙️ تنظیمات سایت
+            <br>
+            <small>تنظیمات مدیریتی در مراحل بعدی توسعه می‌یابد.</small>
+        </div>
 
-            passwordInput.type = isHidden ? "text" : "password";
-            togglePassword.textContent = isHidden ? "مخفی‌کردن" : "نمایش";
-        });
+        <button id="adminLogout" class="secondary">خروج از حساب</button>
+    </section>
 
-        loginForm.addEventListener("submit", function (event) {
+    <!-- پنل کاربر -->
+    <section id="userPage" class="card dashboard">
+        <span class="badge">👤 USER</span>
+
+        <h2 style="margin-top:18px">پنل کاربری ORVIAN</h2>
+
+        <div class="welcome">
+            خوش آمدی، <strong id="userName"></strong>!
+            <br>
+            از حساب کاربری خودت استفاده کن.
+        </div>
+
+        <div class="feature">
+            👤 پروفایل من
+            <br>
+            <small>اطلاعات پروفایل در نسخه‌های بعدی اضافه می‌شود.</small>
+        </div>
+
+        <div class="feature">
+            🎮 بازی‌ها و محصولات
+            <br>
+            <small>این بخش می‌تواند در آینده به فروشگاه ORVIAN متصل شود.</small>
+        </div>
+
+        <div class="feature">
+            🔔 اعلان‌ها
+            <br>
+            <small>اعلان‌های حساب در آینده قابل نمایش خواهند بود.</small>
+        </div>
+
+        <button id="userLogout" class="secondary">خروج از حساب</button>
+    </section>
+
+    <div class="footer">ORVIAN © نسخهٔ آزمایشی</div>
+
+</main>
+
+<script>
+    /*
+      حساب‌های ساختگی برای تمرین.
+      این روش برای احراز هویت واقعی امن نیست.
+    */
+    const demoAccounts = [
+        {
+            username: "admin",
+            password: "admin123",
+            role: "admin"
+        },
+        {
+            username: "user",
+            password: "user123",
+            role: "user"
+        }
+    ];
+
+    const loginPage = document.getElementById("loginPage");
+    const adminPage = document.getElementById("adminPage");
+    const userPage = document.getElementById("userPage");
+    const loginMessage = document.getElementById("loginMessage");
+
+    function showPage(page) {
+        loginPage.style.display = "none";
+        adminPage.style.display = "none";
+        userPage.style.display = "none";
+
+        page.style.display = "block";
+    }
+
+    document.getElementById("loginForm").addEventListener(
+        "submit",
+        function (event) {
             event.preventDefault();
 
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value;
+            const username =
+                document.getElementById("username").value.trim();
 
-            message.className = "message";
+            const password =
+                document.getElementById("password").value;
 
-            if (!username || !password) {
-                message.textContent = "لطفاً نام کاربری و رمز عبور را وارد کن.";
-                message.classList.add("error");
+            const account = demoAccounts.find(function (item) {
+                return item.username === username &&
+                       item.password === password;
+            });
+
+            if (!account) {
+                loginMessage.textContent =
+                    "نام کاربری یا رمز عبور آزمایشی صحیح نیست.";
                 return;
             }
 
-            message.textContent =
-                "فرم تکمیل شد؛ برای ورود واقعی باید سیستم احراز هویت متصل شود.";
+            loginMessage.textContent = "";
 
-            message.className = "message error";
-        });
-    </script>
+            if (account.role === "admin") {
+                document.getElementById("adminName").textContent =
+                    account.username;
+
+                showPage(adminPage);
+            } else {
+                document.getElementById("userName").textContent =
+                    account.username;
+
+                showPage(userPage);
+            }
+        }
+    );
+
+    function logout() {
+        document.getElementById("loginForm").reset();
+        loginMessage.textContent = "";
+        showPage(loginPage);
+    }
+
+    document.getElementById("adminLogout")
+        .addEventListener("click", logout);
+
+    document.getElementById("userLogout")
+        .addEventListener("click", logout);
+</script>
 
 </body>
 </html>
